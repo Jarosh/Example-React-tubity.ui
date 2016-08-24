@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "86d260a6147e5abca3b8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ef4c177c89a7d888cbeb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -639,7 +639,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'ul',
-	                        { className: 'nav navbar-nav' },
+	                        { className: 'nav navbar-nav pull-right' },
 	                        _react2.default.createElement(
 	                            'li',
 	                            null,
@@ -27800,14 +27800,33 @@
 	    }
 
 	    _createClass(AppIndex, [{
+	        key: 'hasLocalStorage',
+	        value: function hasLocalStorage() {
+	            var tst = 'tubity-ui';
+
+	            if (typeof this.hasLocalStorage.ret === 'undefined') {
+	                try {
+	                    var tmp = null;
+	                    localStorage.setItem(tst, tst);
+	                    tmp = localStorage.getItem(tst);
+	                    localStorage.removeItem(tst);
+	                    this.hasLocalStorage.ret = tmp == tst;
+	                } catch (e) {
+	                    this.hasLocalStorage.ret = false;
+	                }
+	            }
+
+	            return this.hasLocalStorage.ret;
+	        }
+	    }, {
 	        key: 'findHistory',
 	        value: function findHistory(item) {
-	            return _.findWhere(JSON.parse(localStorage.getItem('history')), item);
+	            return this.hasLocalStorage() ? _.findWhere(JSON.parse(localStorage.getItem('history')), item) : [];
 	        }
 	    }, {
 	        key: 'pushHistory',
 	        value: function pushHistory(item) {
-	            var tmp = JSON.parse(localStorage.getItem('history'));
+	            var tmp = this.hasLocalStorage() ? JSON.parse(localStorage.getItem('history')) : [];
 
 	            if (!tmp) tmp = [];
 
@@ -27823,18 +27842,18 @@
 
 	            this.refs.wid__Logger.setState({ log: tmp });
 
-	            localStorage.setItem('history', JSON.stringify(tmp));
+	            if (this.hasLocalStorage()) localStorage.setItem('history', JSON.stringify(tmp));
 	        }
 	    }, {
 	        key: 'dropHistory',
 	        value: function dropHistory(item) {
-	            var tmp = JSON.parse(localStorage.getItem('history'));
+	            var tmp = this.hasLocalStorage() ? JSON.parse(localStorage.getItem('history')) : [];
 
 	            tmp = _.without(tmp, _.findWhere(tmp, item));
 
 	            this.refs.wid__Logger.setState({ log: tmp });
 
-	            localStorage.setItem('history', JSON.stringify(tmp));
+	            if (this.hasLocalStorage()) localStorage.setItem('history', JSON.stringify(tmp));
 	        }
 	    }, {
 	        key: 'render',
@@ -27957,10 +27976,10 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'tubity-' + this.constructor.name },
+	                { className: 'tubity-' + this.constructor.name + ' input-group' },
 	                _react2.default.createElement('input', {
 	                    ref: 'txt__Url',
-	                    className: 'url',
+	                    className: 'url form-control',
 	                    type: 'text',
 	                    value: this.state.shorten_url ? this.state.shorten_url : this.state.url,
 	                    placeholder: 'Your original URL here',
@@ -27970,11 +27989,19 @@
 	                }),
 	                !this.state.shorten_url ? _react2.default.createElement(
 	                    'button',
-	                    { onClick: this.onShorten.bind(this) },
+	                    {
+	                        className: 'btn ' + (this.state.url ? 'btn-primary' : ''),
+	                        disabled: !this.state.url,
+	                        onClick: this.onShorten.bind(this)
+	                    },
 	                    'Shorten URL'
 	                ) : _react2.default.createElement(
 	                    _reactClipboard2.default,
-	                    { 'data-clipboard-text': this.state.shorten_url, onSuccess: this.onClear.bind(this) },
+	                    {
+	                        className: 'btn ' + (this.state.url ? 'btn-success' : ''),
+	                        'data-clipboard-text': this.state.shorten_url,
+	                        onSuccess: this.onClear.bind(this)
+	                    },
 	                    'Copy & Clean'
 	                )
 	            );
@@ -31144,23 +31171,10 @@
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(WidLogger).call(this, props, context));
 
-	        var hasLocalStorage = function () {
-	            var tst = 'tubity-ui';
-	            try {
-	                var tmp = null;
-	                localStorage.setItem(tst, tst);
-	                tmp = localStorage.getItem(tst);
-	                localStorage.removeItem(tst);
-	                return tmp == tst;
-	            } catch (e) {
-	                return false;
-	            }
-	        }();
-
-	        if (hasLocalStorage && !localStorage.getItem('history')) localStorage.setItem('history', JSON.stringify([]));
+	        if (_this.props.app.hasLocalStorage() && !localStorage.getItem('history')) localStorage.setItem('history', JSON.stringify([]));
 
 	        _this.state = {
-	            log: hasLocalStorage ? JSON.parse(localStorage.getItem('history')) : undefined
+	            log: _this.props.app.hasLocalStorage() ? JSON.parse(localStorage.getItem('history')) : undefined
 	        };
 	        return _this;
 	    }
@@ -31203,7 +31217,9 @@
 	                    _react2.default.createElement(
 	                        'tbody',
 	                        null,
-	                        this.state.log.reverse().map(function (v, i) {
+	                        _.sortBy(this.state.log, function (i) {
+	                            return i.ts;
+	                        }).reverse().map(function (v, i) {
 	                            return _react2.default.createElement(_IncLoggerItem.IncLoggerItem, { key: i, item: v, onDelete: function onDelete(item) {
 	                                    _this2.props.app.dropHistory(item);
 	                                } });
@@ -31225,7 +31241,7 @@
 /* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -31256,44 +31272,44 @@
 	    }
 
 	    _createClass(IncLoggerItem, [{
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            var _this2 = this;
 
 	            return _react2.default.createElement(
-	                'tr',
+	                "tr",
 	                null,
 	                _react2.default.createElement(
-	                    'td',
-	                    null,
+	                    "td",
+	                    { className: "text-center" },
 	                    _react2.default.createElement(
-	                        'span',
-	                        { onClick: function onClick() {
+	                        "span",
+	                        { className: "btn btn-xs btn-warning", onClick: function onClick() {
 	                                _this2.props.onDelete(_this2.props.item);
 	                            } },
-	                        '×'
+	                        "×"
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'td',
+	                    "td",
 	                    null,
 	                    _react2.default.createElement(
-	                        'a',
-	                        { href: this.props.item['url'], target: '_blank' },
+	                        "a",
+	                        { href: this.props.item['url'], target: "_blank" },
 	                        this.props.item['url']
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'td',
+	                    "td",
 	                    null,
 	                    new Date(this.props.item['ts']).toLocaleDateString() + ' ' + new Date(this.props.item['ts']).toLocaleTimeString()
 	                ),
 	                _react2.default.createElement(
-	                    'td',
+	                    "td",
 	                    null,
 	                    _react2.default.createElement(
-	                        'a',
-	                        { href: this.props.item['shorten_url'], target: '_blank' },
+	                        "a",
+	                        { href: this.props.item['shorten_url'], target: "_blank" },
 	                        this.props.item['shorten_url']
 	                    )
 	                )

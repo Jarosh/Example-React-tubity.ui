@@ -7,16 +7,40 @@ import {WidLogger} from './WidLogger.jsx';
 export class AppIndex extends React.Component {
 
 
+    hasLocalStorage() {
+        var tst = 'tubity-ui';
+
+        if ( typeof this.hasLocalStorage.ret === 'undefined' ) {
+            try {
+                var tmp = null;
+                localStorage.setItem(tst, tst);
+                tmp = localStorage.getItem(tst);
+                localStorage.removeItem(tst);
+                this.hasLocalStorage.ret = (tmp==tst);
+            }
+            catch(e) {
+                this.hasLocalStorage.ret = false;
+            }
+        }
+
+        return this.hasLocalStorage.ret;
+    }
+
+
     findHistory(item) {
-        return _.findWhere(
-            JSON.parse(localStorage.getItem('history')),
-            item
-        );
+        return this.hasLocalStorage()
+            ? _.findWhere(
+                JSON.parse(localStorage.getItem('history')),
+                item
+            )
+            : [];
     }
 
 
     pushHistory(item) {
-        var tmp = JSON.parse(localStorage.getItem('history'));
+        var tmp = this.hasLocalStorage()
+            ? JSON.parse(localStorage.getItem('history'))
+            : [];
 
         if (!tmp)
             tmp = [];
@@ -40,18 +64,22 @@ export class AppIndex extends React.Component {
 
         this.refs.wid__Logger.setState({ log: tmp });
 
-        localStorage.setItem('history', JSON.stringify(tmp));
+        if (this.hasLocalStorage())
+            localStorage.setItem('history', JSON.stringify(tmp));
     }
 
 
     dropHistory(item) {
-        var tmp = JSON.parse(localStorage.getItem('history'));
+        var tmp = this.hasLocalStorage()
+            ? JSON.parse(localStorage.getItem('history'))
+            : [];
 
         tmp = _.without( tmp, _.findWhere(tmp,item) );
 
         this.refs.wid__Logger.setState({ log: tmp });
 
-        localStorage.setItem('history', JSON.stringify(tmp));
+        if (this.hasLocalStorage())
+            localStorage.setItem('history', JSON.stringify(tmp));
     }
 
 

@@ -8,25 +8,11 @@ export class WidLogger extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        var hasLocalStorage = (function() {
-            var tst = 'tubity-ui';
-            try {
-                var tmp = null;
-                localStorage.setItem(tst, tst);
-                tmp = localStorage.getItem(tst);
-                localStorage.removeItem(tst);
-                return (tmp==tst);
-            }
-            catch(e) {
-                return false;
-            }
-        })();
-
-        if (hasLocalStorage && !localStorage.getItem('history'))
+        if ( this.props.app.hasLocalStorage() && !localStorage.getItem('history') )
             localStorage.setItem('history', JSON.stringify([]));
 
         this.state = {
-            log: hasLocalStorage ? JSON.parse(localStorage.getItem('history')) : undefined
+            log: this.props.app.hasLocalStorage() ? JSON.parse(localStorage.getItem('history')) : undefined
         };
     }
 
@@ -47,7 +33,7 @@ export class WidLogger extends React.Component {
                         </tr>
                         </thead>
                         <tbody>
-                        { this.state.log.reverse().map((v, i)=> {
+                        { _.sortBy(this.state.log, function(i) { return i.ts; }).reverse().map((v, i)=> {
                             return <IncLoggerItem key={i} item={v} onDelete={ (item)=>{ this.props.app.dropHistory(item); } }/>
                         }) }
                         </tbody>

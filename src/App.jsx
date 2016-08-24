@@ -25,7 +25,7 @@ class App extends React.Component {
                 <h1 className="navbar-header">
                     Tubity-UI
                 </h1>
-                <ul className="nav navbar-nav">
+                <ul className="nav navbar-nav pull-right">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/about">About</Link></li>
                     <li><a href="https://github.com/Jarosh/tubity-ui" target="_blank">GitHub</a></li>

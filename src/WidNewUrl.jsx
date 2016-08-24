@@ -79,10 +79,10 @@ export class WidNewUrl extends CoreApi {
 
 
     render() {
-        return <div className={'tubity-'+this.constructor.name}>
+        return <div className={'tubity-'+this.constructor.name+' input-group'}>
             <input
                 ref="txt__Url"
-                className="url"
+                className="url form-control"
                 type="text"
                 value={ this.state.shorten_url ? this.state.shorten_url : this.state.url }
                 placeholder="Your original URL here"
@@ -91,8 +91,22 @@ export class WidNewUrl extends CoreApi {
                 onKeyDown={this.onKeyDown.bind(this)}
                 />
             { !this.state.shorten_url
-                ? <button onClick={this.onShorten.bind(this)}>Shorten URL</button>
-                : <Clipboard data-clipboard-text={this.state.shorten_url} onSuccess={this.onClear.bind(this)}>Copy &amp; Clean</Clipboard>
+                ?
+                <button
+                    className={'btn '+(this.state.url?'btn-primary':'')}
+                    disabled={!this.state.url}
+                    onClick={this.onShorten.bind(this)}
+                    >
+                    Shorten URL
+                </button>
+                :
+                <Clipboard
+                    className={'btn '+(this.state.url?'btn-success':'')}
+                    data-clipboard-text={this.state.shorten_url}
+                    onSuccess={this.onClear.bind(this)}
+                    >
+                    Copy &amp; Clean
+                </Clipboard>
             }
         </div>
     }
