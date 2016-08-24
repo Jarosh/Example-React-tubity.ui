@@ -40,8 +40,17 @@ You'll have to update a value of the APP.CONF.api_host variable in the
 `app/index.html` file if you're running tubity backend on port:host which differ
 from those by default `localhost:9990`
 
-## Release Notes
+## Notes
 
 - Client-side URL validation was ommited intentionally since documentation
 doesn't mention how intelligent the backend is and whether it's able to process
 schemeless URL etc.    
+
+
+## Compatibility
+
+Was tested on:
+
+- Google Chrome 48.0.2564.116 (64-bit)
+- Firefox 47.0
+- Internet Explorer 11

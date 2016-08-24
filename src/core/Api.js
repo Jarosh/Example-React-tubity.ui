@@ -82,8 +82,8 @@ export class Api extends React.Component {
 
                         if (!exc) {
                             alert( window.location.protocol.match(/^https?:?$/)
-                                    ? 'Your browser is outdated.'
-                                    : 'It seems that application was lauched locally as file://\r\nPlease put it under control of the webserver (e.g. nginx or Apache).'
+                                ? 'Either backend is down or your browser is outdated.'
+                                : 'It seems that application was lauched locally as file://\r\nPlease put it under control of the webserver (e.g. nginx or Apache).'
                             );
                         }
 

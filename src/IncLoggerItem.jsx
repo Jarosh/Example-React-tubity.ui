@@ -4,6 +4,13 @@ import React from 'react';
 export class IncLoggerItem extends React.Component {
 
 
+    static get defaultProps() {
+        return {
+            onDelete: ()=>{}
+        }
+    }
+
+
     render() {
         return <tr>
             <td className="text-center">

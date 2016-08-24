@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ef4c177c89a7d888cbeb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "dbb76206acc9ce166702"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -30670,7 +30670,7 @@
 	                        if (!(exc instanceof Promise)) exc = null;
 
 	                        if (!exc) {
-	                            alert(window.location.protocol.match(/^https?:?$/) ? 'Your browser is outdated.' : 'It seems that application was lauched locally as file://\r\nPlease put it under control of the webserver (e.g. nginx or Apache).');
+	                            alert(window.location.protocol.match(/^https?:?$/) ? 'Either backend is down or your browser is outdated.' : 'It seems that application was lauched locally as file://\r\nPlease put it under control of the webserver (e.g. nginx or Apache).');
 	                        }
 
 	                        return Promise.reject(exc);
@@ -31314,6 +31314,13 @@
 	                    )
 	                )
 	            );
+	        }
+	    }], [{
+	        key: "defaultProps",
+	        get: function get() {
+	            return {
+	                onDelete: function onDelete() {}
+	            };
 	        }
 	    }]);
 
