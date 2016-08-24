@@ -6,7 +6,7 @@ export class AppAbout extends React.Component {
 
 
     render() {
-        return  <div>
+        return  <div className={'tubity-'+this.constructor.name}>
             <p>
                 <b>tubity-ui</b> is a front-end part of a <a href="https://github.com/ababich/tubity-roda" target="_blank">tubity-roda</a> URL shortener.
             </p>

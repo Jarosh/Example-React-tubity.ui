@@ -60,7 +60,7 @@ export class WidNewUrl extends CoreApi {
                             .catch((exc) => {
                                 alert(exc);
                             });
-                    else
+                    else if (exc)
                         alert(exc);
                 });
         }
@@ -79,7 +79,7 @@ export class WidNewUrl extends CoreApi {
 
 
     render() {
-        return <div>
+        return <div className={'tubity-'+this.constructor.name}>
             <input
                 ref="txt__Url"
                 className="url"

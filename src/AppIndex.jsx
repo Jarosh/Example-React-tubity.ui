@@ -56,7 +56,7 @@ export class AppIndex extends React.Component {
 
 
     render() {
-        return  <div>
+        return  <div className={'tubity-'+this.constructor.name}>
             <WidNewUrl app={this}></WidNewUrl>
             <WidLogger ref="wid__Logger" app={this}></WidLogger>
         </div>

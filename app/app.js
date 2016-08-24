@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "fb4610ecbc51b9e39d5e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "86d260a6147e5abca3b8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -27841,7 +27841,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'tubity-' + this.constructor.name },
 	                _react2.default.createElement(_WidNewUrl.WidNewUrl, { app: this }),
 	                _react2.default.createElement(_WidLogger.WidLogger, { ref: 'wid__Logger', app: this })
 	            );
@@ -27938,7 +27938,7 @@
 	                        }
 	                    }).catch(function (exc) {
 	                        alert(exc);
-	                    });else alert(exc);
+	                    });else if (exc) alert(exc);
 	                });
 	            }
 	        }
@@ -27957,7 +27957,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'tubity-' + this.constructor.name },
 	                _react2.default.createElement('input', {
 	                    ref: 'txt__Url',
 	                    className: 'url',
@@ -30641,6 +30641,11 @@
 	                        return res instanceof Object ? res : Promise.reject('Malformed JSON received.');
 	                    }).catch(function (exc) {
 	                        if (!(exc instanceof Promise)) exc = null;
+
+	                        if (!exc) {
+	                            alert(window.location.protocol.match(/^https?:?$/) ? 'Your browser is outdated.' : 'It seems that application was lauched locally as file://\r\nPlease put it under control of the webserver (e.g. nginx or Apache).');
+	                        }
+
 	                        return Promise.reject(exc);
 	                    });
 
@@ -31139,11 +31144,24 @@
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(WidLogger).call(this, props, context));
 
-	        _this.state = {
-	            log: JSON.parse(localStorage.getItem('history'))
-	        };
+	        var hasLocalStorage = function () {
+	            var tst = 'tubity-ui';
+	            try {
+	                var tmp = null;
+	                localStorage.setItem(tst, tst);
+	                tmp = localStorage.getItem(tst);
+	                localStorage.removeItem(tst);
+	                return tmp == tst;
+	            } catch (e) {
+	                return false;
+	            }
+	        }();
 
-	        if (!localStorage.getItem('history')) localStorage.setItem('history', JSON.stringify([]));
+	        if (hasLocalStorage && !localStorage.getItem('history')) localStorage.setItem('history', JSON.stringify([]));
+
+	        _this.state = {
+	            log: hasLocalStorage ? JSON.parse(localStorage.getItem('history')) : undefined
+	        };
 	        return _this;
 	    }
 
@@ -31154,9 +31172,8 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                null,
-	                this.state.test,
-	                _react2.default.createElement(
+	                { className: 'tubity-' + this.constructor.name },
+	                typeof this.state.log !== 'undefined' ? this.state.log.length ? _react2.default.createElement(
 	                    'table',
 	                    { className: 'table table-bordered table-striped table-hover' },
 	                    _react2.default.createElement(
@@ -31192,6 +31209,10 @@
 	                                } });
 	                        })
 	                    )
+	                ) : null : _react2.default.createElement(
+	                    'b',
+	                    null,
+	                    'dddddd'
 	                )
 	            );
 	        }
@@ -31326,7 +31347,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'tubity-' + this.constructor.name },
 	                _react2.default.createElement(
 	                    'p',
 	                    null,
