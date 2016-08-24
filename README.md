@@ -10,7 +10,7 @@ assumed to be installed prior execution of the following instructions._
 
 1. Checkout
 2. `cd` into the `bin` directory and run `node install` command
-3. run `./webpack` command when you will need to rebuild an application
+3. run `./webpack` command when you will need to rebuild the application
 
 ## Installation
 
@@ -33,18 +33,18 @@ if any was passed as an argument during server startup).
 
 ## Configuration
 
-In order to eliminate the need for rebuilding each time when backend server host
-was changed it was made a part of the `app/index.html`
+In order to eliminate the need for rebuilding each time when backend server was
+changed its host name was made a part of the `app/index.html`
 
-You'll have to update a value of the APP.CONF.api_host variable in the
-`app/index.html` file if you're running tubity backend on port:host which differ
-from those by default `localhost:9990`
+You'll have to update a value of the `APP.CONF.api_host` variable in the
+`app/index.html` file if you're running tubity backend on _port:host_
+that differ from those by default (`localhost:9990`).
 
 ## Notes
 
 - Client-side URL validation was ommited intentionally since documentation
 doesn't mention how intelligent the backend is and whether it's able to process
-schemeless URL etc.    
+schemeless URL or if it will be able in the future etc.    
 
 
 ## Compatibility
