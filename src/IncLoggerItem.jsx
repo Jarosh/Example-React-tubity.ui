@@ -22,9 +22,7 @@ export class IncLoggerItem extends React.Component {
                 <a href={this.props.item['url']} target="_blank">{this.props.item['url']}</a>
             </td>
             <td>
-                { date.toLocaleDateString() }
-                &nbsp; &nbsp;
-                { date.getHours() + ':' + date.getMinutes() }
+                { date.toLocaleDateString() + ' ' + date.toLocaleTimeString() }
             </td>
             <td>
                 <a href={this.props.item['shorten_url']} target="_blank">{this.props.item['shorten_url']}</a>

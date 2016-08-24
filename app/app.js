@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "313a915fc690971f4dff"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8775ea9a13168c992df4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31304,9 +31304,7 @@
 	                _react2.default.createElement(
 	                    'td',
 	                    null,
-	                    date.toLocaleDateString(),
-	                    '   ',
-	                    date.getHours() + ':' + date.getMinutes()
+	                    date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
 	                ),
 	                _react2.default.createElement(
 	                    'td',
