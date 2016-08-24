@@ -4,7 +4,7 @@
 
 ## Installation
 
-(**NodeJS** and its **npm** package manager are both assumed to be installed prior execution of the following instructions)
+([**NodeJS**](https://nodejs.org/) and its **npm** package manager are both assumed to be installed prior execution of the following instructions)
 
 1. Checkout
 2. `cd` into the `bin` directory and run `node install` command
