@@ -14,4 +14,4 @@ Built application is shipped with this repository and is located in the `app/app
 
 ## Configuration
 
-In order to eliminate the need for rebuilding each time when backend server host was changed it was made a part of `/app/index.html` file (check for `APP.CONF` object out there).
+In order to eliminate the need for rebuilding each time when backend server host was changed it was made a part of the `app/index.html` file (check for `APP.CONF` object out there).
