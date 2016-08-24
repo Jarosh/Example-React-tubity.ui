@@ -12,6 +12,8 @@ export class IncLoggerItem extends React.Component {
 
 
     render() {
+        var date = new Date(this.props.item['ts']);
+
         return <tr>
             <td className="text-center">
                 <span className="btn btn-xs btn-warning" onClick={ ()=>{ this.props.onDelete(this.props.item); } }>&times;</span>
@@ -20,7 +22,9 @@ export class IncLoggerItem extends React.Component {
                 <a href={this.props.item['url']} target="_blank">{this.props.item['url']}</a>
             </td>
             <td>
-                { (new Date(this.props.item['ts'])).toLocaleDateString() + ' ' + (new Date(this.props.item['ts'])).toLocaleTimeString() }
+                { date.toLocaleDateString() }
+                &nbsp; &nbsp;
+                { date.getHours() + ':' + date.getMinutes() }
             </td>
             <td>
                 <a href={this.props.item['shorten_url']} target="_blank">{this.props.item['shorten_url']}</a>

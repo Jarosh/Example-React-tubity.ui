@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dbb76206acc9ce166702"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "313a915fc690971f4dff"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31241,7 +31241,7 @@
 /* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -31272,51 +31272,55 @@
 	    }
 
 	    _createClass(IncLoggerItem, [{
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
 
+	            var date = new Date(this.props.item['ts']);
+
 	            return _react2.default.createElement(
-	                "tr",
+	                'tr',
 	                null,
 	                _react2.default.createElement(
-	                    "td",
-	                    { className: "text-center" },
+	                    'td',
+	                    { className: 'text-center' },
 	                    _react2.default.createElement(
-	                        "span",
-	                        { className: "btn btn-xs btn-warning", onClick: function onClick() {
+	                        'span',
+	                        { className: 'btn btn-xs btn-warning', onClick: function onClick() {
 	                                _this2.props.onDelete(_this2.props.item);
 	                            } },
-	                        "×"
+	                        '×'
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "td",
+	                    'td',
 	                    null,
 	                    _react2.default.createElement(
-	                        "a",
-	                        { href: this.props.item['url'], target: "_blank" },
+	                        'a',
+	                        { href: this.props.item['url'], target: '_blank' },
 	                        this.props.item['url']
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "td",
+	                    'td',
 	                    null,
-	                    new Date(this.props.item['ts']).toLocaleDateString() + ' ' + new Date(this.props.item['ts']).toLocaleTimeString()
+	                    date.toLocaleDateString(),
+	                    '   ',
+	                    date.getHours() + ':' + date.getMinutes()
 	                ),
 	                _react2.default.createElement(
-	                    "td",
+	                    'td',
 	                    null,
 	                    _react2.default.createElement(
-	                        "a",
-	                        { href: this.props.item['shorten_url'], target: "_blank" },
+	                        'a',
+	                        { href: this.props.item['shorten_url'], target: '_blank' },
 	                        this.props.item['shorten_url']
 	                    )
 	                )
 	            );
 	        }
 	    }], [{
-	        key: "defaultProps",
+	        key: 'defaultProps',
 	        get: function get() {
 	            return {
 	                onDelete: function onDelete() {}
