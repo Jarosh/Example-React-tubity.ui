@@ -1,6 +1,6 @@
 # Example -> React -> tubity.ui
 
-**tubity-ui** is a front-end for the
+**tubity.ui** is a front-end for the
 [tubity-roda](https://github.com/ababich/tubity-roda) URL shortening service.
 
 ## Prerequisites
